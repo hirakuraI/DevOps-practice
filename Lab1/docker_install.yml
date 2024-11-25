@@ -1,0 +1,32 @@
+---
+- name: Install docker on all servers
+  hosts: app
+  become: true
+  tasks:
+    - name: Install docker dependecies
+      apt:
+        name:
+          - ca-certificates
+          - curl
+    - name: Create keyrings directory
+      file:
+         path: /etc/apt/keyrings
+         state: directory
+         mode: 0755
+    - name:
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: Add repository to apt sources
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+        state: present
+    - name: Install docker
+      apt:
+        name:
+          - docker
+          - docker.io
+          - docker-compose
+          - docker-registry
+        state: latest
+        update-cache: true

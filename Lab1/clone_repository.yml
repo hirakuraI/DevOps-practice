@@ -1,0 +1,16 @@
+---
+- name: Clone Repository
+  hosts: app
+  become: true
+  tasks:
+    - name: Install Git if needed
+      apt:
+        name: git
+        state: present
+        update-cache: true
+
+    - name: Clone Project Repository
+      git:
+        repo: https://github.com/mdn/django-locallibrary-tutorial.git
+        dest: ~/django-locallibrary-tutorial
+        force: true
