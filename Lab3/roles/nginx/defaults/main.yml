@@ -1,0 +1,4 @@
+---
+nginx_available_dir: "/etc/nginx/sites-available/default"
+
+nginx_enable_dir: "/etc/nginx/sites-enabled/default"
